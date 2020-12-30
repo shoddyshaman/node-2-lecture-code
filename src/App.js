@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import {Component} from 'react';
+import Book from './Components/Book';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      books: [],
+      title: '',
+      author: ''
+    }
+  }
+
+  handleInputs = (e) => {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+  }
+
+  getBooks = () => {
+    //code here
+  }
+
+  addBook = () => {
+    //code here
+  }
+
+  render(){
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>WR8's Bookshelf</h1>
+          <input value={this.state.title} placeholder='Title' onChange={e => this.handleInputs(e)}/>
+          <input value={this.state.author} placeholder='Author' onChange={e => this.handleInputs(e)}/>
+          <button>Add Book</button>
+          {this.state.books.map(book => (
+            <Book key={book.id} book={book} getBooksFn={this.getBooks}/>
+          ))}
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
